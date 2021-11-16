@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  simple-gofiber-postgres:
+    container_name: simple-gofiber-postgres
+    image: postgres:13
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: simple-gofiber
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./data/postgres/pgdata:/var/lib/postgresql/data/pgdata
+    restart: always
+    ports:
+      - '5434:5432'
+    networks:
+      - simple-gofiber
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  simple-gofiber:
+    driver: bridge
